@@ -1,0 +1,13 @@
+---
+# defaults file for ansible-berkshelf-api
+berkshelf_api_repo: berkshelf/berkshelf-api
+berkshelf_api_release: v1.0.0
+berkshelf_api_owner: berkshelf
+berkshelf_api_group: berkshelf
+berkshelf_api_home: /etc/berkshelf/api-server
+berkshelf_api_deploy_path: /opt/berkshelf-api/v1.0.0
+berkshelf_api_port: 26200
+berkshelf_api_proxy_port: 80
+berkshelf_api_host:
+berkshelf_api_config_path: /etc/berkshelf/api-server/config.json
+berkshelf_api_config: {:home_path=>"/etc/berkshelf/api-server"}
