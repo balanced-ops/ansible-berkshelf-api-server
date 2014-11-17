@@ -1,5 +1,5 @@
 [program:berkshelf-api]
-command=bin/berks-api -p {{ berkshelf_api_port }} -c {{ berkshelf_api_config_path }}
+command=/usr/local/bin/bundle exec bin/berks-api -p {{ berkshelf_api_port }} -c {{ berkshelf_api_config_path }}
 process_name=%(program_name)s
 directory={{ berkshelf_api_home }}
 user={{ berkshelf_api_owner }}

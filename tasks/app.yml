@@ -31,3 +31,20 @@
   shell: bundle install --deployment --without development test
   args:
     chdir: "{{ berkshelf_api_home }}"
+
+- name: writing supervisor script
+  template: >
+    src=supervisor-berkshelf.conf.j2
+    dest={{ supervisord_additional_conf_dir }}/berkshelf.conf
+    owner={{ berkshelf_api_owner }}
+    group={{ berkshelf_api_group }}
+    mode=0644
+  notify: restart berkshelf
+
+- name: update berkshelf supervisor configuration
+  supervisorctl: >
+    name=berkshelf-api
+    supervisorctl_path={{ supervisord_bin_dir }}/supervisorctl
+    state=present
+  register: sv_out
+  changed_when: sv_out.stdout is defined and sv_out.stdout != ""
