@@ -1,0 +1,27 @@
+---
+- name: Add nginx ppa
+  apt_repository: repo=ppa:nginx/stable state=present update_cache=yes
+
+- name: Install nginx
+  apt: name=nginx state=present
+
+- name: Add nginx logrotate
+  copy: >-
+    src=nginx-logrotate
+    dest=/etc/logrotate.d/nginx
+
+- name: Deactivate the default nginx site
+  file: path=/etc/nginx/sites-enabled/default
+        state=absent
+
+- name: Add berkshelf as a nginx site
+  template: >
+    src=nginx-berkshelf.conf.j2
+    dest=/etc/nginx/sites-available/berkshelf-site.conf
+  notify: restart nginx
+
+- name: Enable berkshelf in nginx
+  file: src=/etc/nginx/sites-available/berkshelf-site.conf
+        dest=/etc/nginx/sites-enabled/berkshelf-site.conf
+        state=link
+  notify: restart nginx

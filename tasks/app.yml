@@ -1,0 +1,33 @@
+---
+- name: install required libarchive-dev
+  apt: pkg=libarchive-dev state=present
+
+- name: install bundler
+  gem: name=bundler state=latest
+
+- name: install berkshelf configuration file
+  template: >
+    src=berkshelf-config.json.j2
+    dest={{ berkshelf_api_home }}/config.json
+
+- name: fetch the berks api binary
+  get_url: >
+    url=https://github.com/berkshelf/berkshelf-api/releases/download/{{ berkshelf_api_release }}/berkshelf-api.tar.gz
+    dest=/tmp/berkshelf-api.tar.gz
+
+- name: extract the api
+  unarchive: >
+    src=/tmp/berkshelf-api.tar.gz
+    dest={{ berkshelf_api_home }}
+    copy=no
+    creates={{ berkshelf_api_home }}/bin/berks-api
+
+- name: change permissions to berkshelf
+  shell: >
+    chown -R {{ berkshelf_api_owner }}:{{ berkshelf_api_group }} {{ berkshelf_api_home }}
+
+
+- name: berkshelf api bundle install
+  shell: bundle install --deployment --without development test
+  args:
+    chdir: "{{ berkshelf_api_home }}"

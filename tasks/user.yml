@@ -1,0 +1,26 @@
+---
+
+- name: create berkshelf group
+  group: name={{ berkshelf_api_group }} state=present
+
+- name: create berkshelf user
+  user: >
+    name={{ berkshelf_api_owner }}
+    group={{ berkshelf_api_group }}
+    password=no
+    system=yes
+    home={{ berkshelf_api_home }}
+    state=present
+
+- name: dirs
+  file: >
+    path={{ item }}
+    owner={{ berkshelf_api_owner }}
+    group={{ berkshelf_api_group }}
+    state=directory
+    mode=0755
+  with_items:
+  - "{{ berkshelf_api_home }}"
+  - /var/run/berkshelf
+  - /var/log/berkshelf
+  notify: restart berkshelf

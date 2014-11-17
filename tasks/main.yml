@@ -1,2 +1,10 @@
 ---
 # tasks file for ansible-berkshelf-api
+- name: setup users and groups
+  include: user.yml
+
+- name: setup the app
+  include: app.yml
+
+- name: setup http proxy
+  include: http_proxy.yml

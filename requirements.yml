@@ -1,0 +1,9 @@
+---
+
+  - src: git+git@github.com:zenoamaro/ansible-supervisord.git
+    version: master
+    name: supervisord
+
+  - src: joshualund.ruby-common
+
+  - src: joshualund.ruby-1_9_3
