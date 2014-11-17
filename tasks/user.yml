@@ -20,7 +20,9 @@
     state=directory
     mode=0755
   with_items:
-  - "{{ berkshelf_api_home }}"
   - /var/run/berkshelf
   - /var/log/berkshelf
+  - /var/lib/berkshelf
+  - "{{ berkshelf_api_home }}"
+  - /etc/berkshelf
   notify: restart berkshelf

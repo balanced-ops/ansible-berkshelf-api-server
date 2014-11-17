@@ -1,6 +1,8 @@
-[program:devpi-server]
-command=/var/lib/devpi/bin/devpi-server --port 3141 --serverdir /var/lib/devpi/devpi-server/data
+[program:berkshelf-api]
+command=bin/berks-api -p {{ berkshelf_api_port }} -c {{ berkshelf_api_config_path }}
 process_name=%(program_name)s
+directory={{ berkshelf_api_home }}
+user={{ berkshelf_api_owner }}
 numprocs=1
 numprocs_start=0
 priority=999
@@ -11,14 +13,13 @@ startretries=3
 exitcodes=0,2
 stopsignal=TERM
 stopwaitsecs=10
-user=devpi
 redirect_stderr=false
-stdout_logfile=/var/log/devpi/devpi-server-stdout.log
+stdout_logfile=/var/log/berkshelf/berkshelf-server-stdout.log
 stdout_logfile_maxbytes=50MB
 stdout_logfile_backups=10
 stdout_capture_maxbytes=0
 stdout_events_enabled=false
-stderr_logfile=/var/log/devpi/devpi-server-stderr.log
+stderr_logfile=/var/log/berkshelf/berkshelf-server-stderr.log
 stderr_logfile_maxbytes=50MB
 stderr_logfile_backups=10
 stderr_capture_maxbytes=0
