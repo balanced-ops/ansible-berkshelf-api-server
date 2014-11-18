@@ -11,5 +11,8 @@ galaxy_info:
     - precise
   categories:
   - system
-dependencies: []
+dependencies:
+ - {role: 'zenoamaro.supervisord'}
+ - {role: 'joshualund.ruby-common'}
+ - {role: 'joshualund.ruby-1_9_3'}
 
