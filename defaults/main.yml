@@ -11,10 +11,4 @@ berkshelf_api_port: 26200
 berkshelf_api_proxy_port: 80
 berkshelf_api_host: berks.vandelay.io
 
-berkshelf_api_endpoints:
- - type: chef_server
-   options: {
-     "url": "https://api.opscode.com/organizations/vialstudios",
-     "client_name": "berkshelf",
-     "client_key": "/etc/berkshelf/api-server/client.pem"
-   }
+berkshelf_api_endpoints: []
