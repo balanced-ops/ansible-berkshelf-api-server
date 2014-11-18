@@ -1,7 +1,7 @@
 {
   "home_path": "/var/lib/berkshelf",
 {% if berkshelf_api_endpoints %}
-  "endpoints": {{  berkshelf_api_endpoints | to_json }}
+  "endpoints": {{  berkshelf_api_endpoints | to_json }},
 {% endif %}
   "build_interval": 5.0
 }
