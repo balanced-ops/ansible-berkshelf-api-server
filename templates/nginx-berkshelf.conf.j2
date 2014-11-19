@@ -4,7 +4,7 @@ upstream berks_api {
 
 server {
   listen {{ berkshelf_api_proxy_port }};
-  server_name {{ berkshelf_api_host }}
+  server_name {{ berkshelf_api_host }};
 
   location / {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
